@@ -86,13 +86,22 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
-  }
+  },
+
+  {
+    title: 'This is my Own Article',
+    date: 'December 2nd, 2020',
+    firstParagraph: `I like coding`,
+    secondParagraph: `I like Pokemon`,
+    thirdParagraph: `I like coding that has Pokemon`
+  },
 ];
 
 /*
   Step 1: Write a component called 'articleMaker' to create an article.
   Your component is a function that takes an article object as its only argument,
   and returns a DOM node looking like the one below:
+
 
   <div class="article">
     <h2>{title of the article}</h2>
@@ -114,3 +123,49 @@ const data = [
   Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
   Refresh the page to see the new article.
 */
+
+
+const articles = document.querySelector('.articles')
+
+function articleMaker(article){
+  const articleHolder = document.createElement('div')
+  const title = document.createElement('h2')
+  const date = document.createElement('p')
+
+  const para1 = document.createElement('p')
+  const para2 = document.createElement('p')
+  const para3 = document.createElement('p')
+
+  const spanBtn = document.createElement('span')
+
+  title.textContent = article.title;
+  date.textContent = article.date;
+  para1.textContent =article.firstParagraph
+  para2.textContent =article.secondParagraph
+  para3.textContent =article.thirdParagraph
+
+  spanBtn.textContent ="+";
+
+  articleHolder.appendChild(title);
+  articleHolder.appendChild(date);
+  articleHolder.appendChild(para1);
+  articleHolder.appendChild(para2);
+  articleHolder.appendChild(para3);
+  articleHolder.appendChild(spanBtn);
+
+  articleHolder.classList.add('article')
+  date.classList.add('date')
+  spanBtn.classList.add('expandButton')
+
+  spanBtn.addEventListener('click', (event) =>{
+    articleHolder.classList.toggle('article-open')
+  });
+
+  return articleHolder
+  }
+
+  data.forEach(articless => {
+    articles.appendChild(articleMaker(articless))
+    });
+
+
